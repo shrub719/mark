@@ -1,0 +1,114 @@
+:root{
+    --body: "Ubuntu", sans-serif;
+    --heading: "Ubuntu Mono", monospace;
+    --code: "Ubuntu Mono", monospace;
+
+    --accent: #bbb;
+    --blue: CornflowerBlue;
+    --black: #111;
+    --grey: #222;
+    --text: #ddd;
+    --hint: #bbb;
+
+    font-size: 18px;
+}
+
+html {
+    background-color: var(--black);
+    color: var(--text);
+    font-family: var(--body);
+}
+
+h1, h2, h3, h4 {
+    font-family: var(--heading);
+}
+
+a {
+    color: var(--blue);
+}
+
+strong {
+    color: var(--accent);
+}
+
+body {
+    max-width: 750px;    
+    padding: 1rem;
+    margin: auto;
+    line-height: 1.5rem;
+
+   blockquote {
+        p {
+            color: var(--hint);
+        }
+
+        background-color: var(--grey);
+        margin-left: 0;
+        margin-right: 0;
+        padding: 5px 2rem 5px 2rem;
+        border-left: 5px solid var(--accent);
+    }
+
+    sup {
+        vertical-align: super;
+        line-height: 0;
+    }
+
+    img {
+        display: block;
+        margin: auto;
+        max-width: 100%;
+        /* maximum height?? */
+    }
+
+    code {
+        font-family: var(--code);
+        background-color: var(--text);
+        color: var(--black);
+        padding: 2px 5px 2px 5px;
+        border-radius: 2px;
+    }
+
+    pre {
+        background-color: var(--text);
+        margin: 1rem;
+        padding: 0.6rem;
+        border-radius: 2px;
+        overflow-x: scroll !important;
+    }
+
+    pre code {
+        padding: 0;
+    }
+
+    mjx-container {
+        overflow-x: auto;
+        overflow-y: clip;
+    }
+
+    table {
+        th {
+            background-color: var(--grey);
+        }
+
+        th, td {
+            padding: 0.5rem;
+        }
+    }
+
+    weak {
+        color: var(--hint);
+    }
+
+    div.footnote {
+        p {
+            text-indent: 0;
+        }   
+
+        a.footnote-backref {
+            text-decoration: none;
+            font-family: var(--code);
+        }
+    }
+}
+
