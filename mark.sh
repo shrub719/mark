@@ -33,13 +33,9 @@ function mark-open() {
     xdg-open "$MARK_DIR/tmp/$name.html"
 }
 
-complete -f -d mark
-
-function mark-publish() {
-    for file in "$1"/*.md
-    do
-        mark-convert "$file" "publish"
-        
-    done
+function mark-clean() {
+    rm "$MARK_DIR/tmp"/*
 }
+
+complete -f -d mark
 
