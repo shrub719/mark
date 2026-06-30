@@ -8,6 +8,7 @@ function mark() {
     then
         for file in "$1"/*.md
         do
+            echo "mark: $file"
             mark-convert "$file"
         done
         mark-open "README.md"
@@ -33,4 +34,12 @@ function mark-open() {
 }
 
 complete -f -d mark
+
+function mark-publish() {
+    for file in "$1"/*.md
+    do
+        mark-convert "$file" "publish"
+        
+    done
+}
 
