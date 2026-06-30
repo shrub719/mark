@@ -4,37 +4,40 @@ function mark() {
     if [ -z "$1" ]
     then
         mark .
+
     elif [ -d "$1" ]
     then
-        for file in "$1"/*.md
+        shopt -s globstar
+        local outdir="$MARK_DIR/tmp"
+        mkdir -p "$outdir"
+        rm "$outdir"/*
+
+        for file in "$1"/**/*.md
         do
             echo "mark: $file"
-            mark-convert "$file"
+            local out="$outdir/$file.html"
+            mkdir -p "$(dirname "$out")"
+            pandoc "$file" -o "$out" -s -c "$MARK_DIR/style.css" --quiet
+            sed -i "s/\.md/\.md.html/g" "$out"
         done
-        mark-open "README.md"
+
+        if [ -f "$outdir/README.md.html" ]
+        then
+            xdg-open "$outdir/README.md.html"
+        else
+            xdg-open "$outdir"
+        fi
+
     elif [[ "$1" == *.md ]]
     then
-        mark-convert "$1"
-        mark-open "$1"
+        local out="$MARK_DIR/tmp.html"
+        pandoc "$1" -o "$out" -s -c "$MARK_DIR/style.css" --quiet
+
+        xdg-open "$out"
+
     else
-        echo "not a .md file or directory" 
+        echo "not a directory or markdown file" 
     fi
-}
-
-function mark-convert() {
-    local name=$(basename "$1")
-    local out="$MARK_DIR/tmp/$name.html"
-    pandoc "$1" -o "$out" -s -c "$MARK_DIR/style.css" --quiet
-    sed -i "s/\.md/\.md.html/g" "$out"
-}
-
-function mark-open() {
-    local name=$(basename "$1")
-    xdg-open "$MARK_DIR/tmp/$name.html"
-}
-
-function mark-clean() {
-    rm "$MARK_DIR/tmp"/*
 }
 
 complete -f -d mark
