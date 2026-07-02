@@ -29,6 +29,9 @@ function mark() {
         if [ -f "$outdir/README.html" ]
         then
             xdg-open "$outdir/README.html"
+        elif [ -f "$outdir/index.html" ]
+        then
+            xdg-open "$outdir/index.html"
         else
             xdg-open "$outdir"
         fi

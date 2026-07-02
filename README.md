@@ -21,7 +21,7 @@ marked              # updating preview of the current directory
 ### Dependencies
 
 - `mark`: `pandoc`
-- `marked`: `mark`, `inotifywait`
+- `marked`: `mark`, `inotify-tools`
 
 ### Setup
 
@@ -38,9 +38,9 @@ directories.
 
 2. Set `MARK_DIR` in `mark.sh` to the location of that directory.
 
-3. Copy `mark.sh` into your `.bashrc` or `.bash_aliases` or whatever.
+3. Copy `mark/mark.sh` into your `.bashrc` or `.bash_aliases` or whatever.
 
-4. If you want, copy `marked.sh` too.
+4. If you want live updates, copy `mark/marked.sh` too.
 
 
 > It's `mark`, like a guy called Mark.  
