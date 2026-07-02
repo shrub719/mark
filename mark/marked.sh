@@ -11,8 +11,9 @@ function marked() {
         mark "$1"
         echo "directory marked"
 
-        inotifywait -mrqe modify --format "%w%f" "$1" | while read file
+        inotifywait -mrqe modify --exclude "/\..+"--format "%w%f" "$1" | while read file
         do
+            [[ "$file" == *.md ]] || continue
             echo "mark: $file"
             local out="$outdir/${file%".md"}.html"
             mkdir -p "$(dirname "$out")"
