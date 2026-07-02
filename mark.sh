@@ -10,22 +10,20 @@ function mark() {
         shopt -s globstar
         local outdir="$MARK_DIR/tmp"
         mkdir -p "$outdir"
-        rm "$outdir"/*
+        rm -r "$outdir"
 
         for file in "$1"/**/*.md
         do
             echo "mark: $file"
-            local out="$outdir/$file.html"
+            local out="$outdir/${file%".md"}.html"
             mkdir -p "$(dirname "$out")"
             pandoc "$file" -o "$out" -s -c "$MARK_DIR/style.css" --quiet
-            sed -i "s/\.md/\.md.html/g" "$out"
+            sed -i "s/\.md/\.html/g" "$out"
         done
 
-        if [ -f "$outdir/README.md.html" ]
+        if [ -f "$outdir/README.html" ]
         then
-            xdg-open "$outdir/README.md.html"
-        else
-            xdg-open "$outdir"
+            xdg-open "$outdir/README.html"
         fi
 
     elif [[ "$1" == *.md ]]
@@ -41,4 +39,5 @@ function mark() {
 }
 
 complete -f -d mark
+
 
