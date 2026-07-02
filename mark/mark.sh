@@ -1,5 +1,9 @@
 export MARK_DIR="[INSERT DIRECTORY OF MARK FILES (style.css, tmp/)]"
 
+function _mark-convert() {
+    pandoc "$1" -o "$2" -s -c "$MARK_DIR/style.css" --quiet
+}
+
 function mark() {
     shopt -s globstar
 
@@ -18,7 +22,7 @@ function mark() {
             echo "mark: $file"
             local out="$outdir/${file%".md"}.html"
             mkdir -p "$(dirname "$out")"
-            pandoc "$file" -o "$out" -s -c "$MARK_DIR/style.css" --quiet
+            _mark-convert "$file" "$out"
             sed -i "s/\.md/\.html/g" "$out"
         done
 
@@ -32,7 +36,7 @@ function mark() {
     elif [[ "$1" == *.md ]]
     then
         local out="$MARK_DIR/tmp.html"
-        pandoc "$1" -o "$out" -s -c "$MARK_DIR/style.css" --quiet
+        _mark-convert "$1" "$out"
 
         xdg-open "$out"
 

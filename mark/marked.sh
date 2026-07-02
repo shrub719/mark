@@ -16,7 +16,7 @@ function marked() {
             echo "mark: $file"
             local out="$outdir/${file%".md"}.html"
             mkdir -p "$(dirname "$out")"
-            pandoc "$file" -o "$out" -s -c "$MARK_DIR/style.css" --quiet
+            _mark-convert "$file" "$out"
             sed -i "s/\.md/\.html/g" "$out"
         done
         
@@ -30,7 +30,7 @@ function marked() {
         do
             echo "mark: $file"
             local out="$MARK_DIR/tmp.html"
-            pandoc "$1" -o "$out" -s -c "$MARK_DIR/style.css" --quiet
+            _mark-convert "$1" "$out"
         done
 
     else
