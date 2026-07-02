@@ -1,13 +1,14 @@
 export MARK_DIR="[INSERT DIRECTORY OF MARK FILES (style.css, tmp/)]"
 
 function mark() {
+    shopt -s globstar
+
     if [ -z "$1" ]
     then
         mark .
 
     elif [ -d "$1" ]
     then
-        shopt -s globstar
         local outdir="$MARK_DIR/tmp"
         mkdir -p "$outdir"
         rm -r "$outdir"
@@ -41,5 +42,4 @@ function mark() {
 }
 
 complete -f -d mark
-
 
