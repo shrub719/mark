@@ -26,12 +26,12 @@ function mark() {
             sed -i "s/\.md/\.html/g" "$out"
         done
 
-        if [ -f "$outdir/README.html" ]
-        then
-            xdg-open "$outdir/README.html"
-        elif [ -f "$outdir/index.html" ]
+        if [ -f "$outdir/index.html" ]
         then
             xdg-open "$outdir/index.html"
+        elif [ -f "$outdir/README.html" ]
+        then
+            xdg-open "$outdir/README.html"
         else
             xdg-open "$outdir"
         fi
