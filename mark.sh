@@ -24,6 +24,8 @@ function mark() {
         if [ -f "$outdir/README.html" ]
         then
             xdg-open "$outdir/README.html"
+        else
+            xdg-open "$outdir"
         fi
 
     elif [[ "$1" == *.md ]]
